@@ -3,15 +3,15 @@ package org.example;
 import java.sql.*;
 
 public class Database {
-    private static Database database_instance = null;
+    private static Database database_instance;
     private Connection connection;
     private Database(){
-        String dbUrl = "org.postgresql:postgresql:42.6.0";
-        String dbUser = "user";
-        String dbPass = "password";
+        String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
+        String dbUser = "postgres";
+        String dbPass = "postgres";
 
-        try{Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-            Statement stmt = conn.createStatement();
+        try{
+            connection = DriverManager.getConnection(dbUrl, dbUser, dbPass);
         }catch (SQLException e) {
             e.printStackTrace();
         }
