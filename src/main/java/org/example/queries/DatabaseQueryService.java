@@ -1,4 +1,7 @@
-package org.example;
+package org.example.queries;
+
+import org.example.config.Database;
+import org.example.wrappers.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -34,7 +37,7 @@ public class DatabaseQueryService {
         return "";
     }
 
-    List<MaxProjectCountClient> findMaxProjectsClient(){
+    public List<MaxProjectCountClient> findMaxProjectsClient(){
         List<MaxProjectCountClient> maxProjectCountClients = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -51,7 +54,7 @@ public class DatabaseQueryService {
         return maxProjectCountClients;
     }
 
-    List<MaxSalaryWorker> findMaxSalaryWorker(){
+    public List<MaxSalaryWorker> findMaxSalaryWorker(){
         List<MaxSalaryWorker> maxSalaryWorker = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -68,7 +71,7 @@ public class DatabaseQueryService {
         return maxSalaryWorker;
     }
 
-    List<LongestProject> findLongestProject(){
+    public List<LongestProject> findLongestProject(){
         List<LongestProject> longestProject = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -85,7 +88,7 @@ public class DatabaseQueryService {
         return longestProject;
     }
 
-    List<YoungestEldestWorkers> findYoungestEldestWorkers(){
+    public List<YoungestEldestWorkers> findYoungestEldestWorkers(){
         List<YoungestEldestWorkers> youngestEldestWorkers = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -103,7 +106,7 @@ public class DatabaseQueryService {
         return youngestEldestWorkers;
     }
 
-    List<ProjectPrices> findProjectPrices(){
+    public List<ProjectPrices> findProjectPrices(){
         List<ProjectPrices> projectPrices = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();

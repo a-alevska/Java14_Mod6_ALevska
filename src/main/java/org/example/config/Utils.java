@@ -1,4 +1,4 @@
-package org.example;
+package org.example.config;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Utils {
-    static void queriesReader(Connection connection, BufferedReader reader) throws IOException, SQLException {
+    public static void queriesReader(Connection connection, BufferedReader reader) throws IOException, SQLException {
         StringBuilder sqlQuery = new StringBuilder();
         String line;
 

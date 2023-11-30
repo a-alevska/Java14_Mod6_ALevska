@@ -1,4 +1,7 @@
-package org.example;
+package org.example.queries;
+
+import org.example.config.Database;
+import org.example.config.Utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

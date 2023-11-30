@@ -1,4 +1,4 @@
-package org.example;
+package org.example.wrappers;
 import java.util.Date;
 import java.util.Objects;
 

@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.queries.DatabaseQueryService;
+import org.example.wrappers.*;
+
 import java.util.List;
 
 public class Main {
