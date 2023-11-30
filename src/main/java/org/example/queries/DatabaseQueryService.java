@@ -5,8 +5,10 @@ import org.example.wrappers.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class DatabaseQueryService {
         connection = Database.get_instance().getConnection();
     }
 
-    private String selectQueryReader(String filename){
+    public String selectQueryReader(String filename){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
 
@@ -31,8 +33,8 @@ public class DatabaseQueryService {
             }
             return sqlQuery.toString();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         return "";
     }
@@ -48,8 +50,8 @@ public class DatabaseQueryService {
                 client.setProjectCount(rs.getInt("project_count"));
                 maxProjectCountClients.add(client);
                 }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return maxProjectCountClients;
     }
@@ -65,8 +67,8 @@ public class DatabaseQueryService {
                 worker.setSalary(rs.getInt("salary"));
                 maxSalaryWorker.add(worker);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return maxSalaryWorker;
     }
@@ -82,8 +84,8 @@ public class DatabaseQueryService {
                 project.setDuration(rs.getInt("duration_months"));
                 longestProject.add(project);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return longestProject;
     }
@@ -100,8 +102,8 @@ public class DatabaseQueryService {
                 workers.setBirthday(rs.getDate("birthday"));
                 youngestEldestWorkers.add(workers);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return youngestEldestWorkers;
     }
@@ -117,8 +119,8 @@ public class DatabaseQueryService {
                 projectPrice.setPrice(rs.getInt("price"));
                 projectPrices.add(projectPrice);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return projectPrices;
     }
