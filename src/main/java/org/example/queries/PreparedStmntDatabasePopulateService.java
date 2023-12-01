@@ -35,7 +35,7 @@ public class PreparedStmntDatabasePopulateService {
         }
     }
 
-    public void dbPopulate(List<Workers> workers, List<Clients> clients, List<Project> projects, List<ProjectWorker> projectWorkers){
+    public void workersPopulate(List<Workers> workers){
         try {
 
             for(Workers worker : workers) {
@@ -45,11 +45,44 @@ public class PreparedStmntDatabasePopulateService {
                 transactionalPrepareStatementWorker.setInt(4, worker.getSalary());
                 transactionalPrepareStatementWorker.addBatch();
             }
+            try {
+                transactionalPrepareStatementWorker.executeBatch();
+
+            } catch(SQLException e) {
+                System.out.println("TRANSACTIONAL FAIL. Rollback changes. Reason: " + e.getMessage());
+                connection.rollback();
+                throw e;
+            }
+
+        } catch(SQLException e) {
+            System.out.println("Can not create Statements. Reason:" + e.getMessage());
+        }
+    }
+
+    public void clientsPopulate(List<Clients> clients){
+        try {
 
             for(Clients client : clients) {
                 transactionalPrepareStatementClient.setString(1, client.getName());
                 transactionalPrepareStatementClient.addBatch();
             }
+
+            try {
+                transactionalPrepareStatementClient.executeBatch();
+
+            } catch(SQLException e) {
+                System.out.println("TRANSACTIONAL FAIL. Rollback changes. Reason: " + e.getMessage());
+                connection.rollback();
+                throw e;
+            }
+
+        } catch(SQLException e) {
+            System.out.println("Can not create Statements. Reason:" + e.getMessage());
+        }
+    }
+
+    public void projectPopulate(List<Project> projects){
+        try {
 
             for(Project project : projects) {
                 transactionalPrepareStatementProject.setInt(1, project.getClientId());
@@ -58,15 +91,29 @@ public class PreparedStmntDatabasePopulateService {
                 transactionalPrepareStatementProject.addBatch();
             }
 
+            try {
+                transactionalPrepareStatementProject.executeBatch();
+
+            } catch(SQLException e) {
+                System.out.println("TRANSACTIONAL FAIL. Rollback changes. Reason: " + e.getMessage());
+                connection.rollback();
+                throw e;
+            }
+
+        } catch(SQLException e) {
+            System.out.println("Can not create Statements. Reason:" + e.getMessage());
+        }
+    }
+
+    public void projectWorkersPopulate(List<ProjectWorker> projectWorkers){
+        try {
+
             for(ProjectWorker projectWorker : projectWorkers) {
                 transactionalPrepareStatementProjectWorker.setInt(1, projectWorker.getProjectId());
                 transactionalPrepareStatementProjectWorker.setInt(2, projectWorker.getWorkerId());
                 transactionalPrepareStatementProjectWorker.addBatch();
             }
             try {
-                transactionalPrepareStatementWorker.executeBatch();
-                transactionalPrepareStatementClient.executeBatch();
-                transactionalPrepareStatementProject.executeBatch();
                 transactionalPrepareStatementProjectWorker.executeBatch();
 
             } catch(SQLException e) {

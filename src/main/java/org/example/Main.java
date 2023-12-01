@@ -2,7 +2,6 @@ package org.example;
 
 import org.example.queries.DatabaseQueryService;
 import org.example.queries.PopulateDB;
-import org.example.queries.PreparedStmntDatabaseInitService;
 import org.example.queries.PreparedStmntDatabasePopulateService;
 import org.example.wrappers.*;
 
@@ -10,17 +9,18 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        PreparedStmntDatabaseInitService initService = new PreparedStmntDatabaseInitService();
         PreparedStmntDatabasePopulateService populateService = new PreparedStmntDatabasePopulateService();
-
-        initService.dbInit();
 
         List<Workers> workers = new PopulateDB().getWorkers();
         List<Clients> clients = new PopulateDB().getClients();
         List<Project> projects = new PopulateDB().getProject();
         List<ProjectWorker> projectWorkers = new PopulateDB().getProjectWorker();
 
-        populateService.dbPopulate(workers, clients, projects, projectWorkers);
+        populateService.workersPopulate(workers);
+        populateService.clientsPopulate(clients);
+        populateService.projectPopulate(projects);
+        populateService.projectWorkersPopulate(projectWorkers);
+
 
         List<MaxProjectCountClient> maxProjectCountClients = new DatabaseQueryService().findMaxProjectsClient();
         List<MaxSalaryWorker> maxSalaryWorkers = new DatabaseQueryService().findMaxSalaryWorker();
