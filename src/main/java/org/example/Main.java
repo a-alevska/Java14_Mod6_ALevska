@@ -1,36 +1,16 @@
 package org.example;
 
-import org.example.queries.DatabaseQueryService;
-import org.example.queries.PopulateDB;
-import org.example.queries.PreparedStmntDatabasePopulateService;
-import org.example.wrappers.*;
-
-import java.util.List;
+import org.example.wrappers.ClientService;
 
 public class Main {
     public static void main(String[] args) {
-        PreparedStmntDatabasePopulateService populateService = new PreparedStmntDatabasePopulateService();
+        ClientService clientService = new ClientService();
 
-        List<Workers> workers = new PopulateDB().getWorkers();
-        List<Clients> clients = new PopulateDB().getClients();
-        List<Project> projects = new PopulateDB().getProject();
-        List<ProjectWorker> projectWorkers = new PopulateDB().getProjectWorker();
+        System.out.println("ID of the created client is: "+clientService.create("Igor"));
+        System.out.println("Client: "+clientService.getById(2));
+        clientService.setName(3,"George");
+        clientService.deleteById(7);
 
-        populateService.workersPopulate(workers);
-        populateService.clientsPopulate(clients);
-        populateService.projectPopulate(projects);
-        populateService.projectWorkersPopulate(projectWorkers);
-
-
-        List<MaxProjectCountClient> maxProjectCountClients = new DatabaseQueryService().findMaxProjectsClient();
-        List<MaxSalaryWorker> maxSalaryWorkers = new DatabaseQueryService().findMaxSalaryWorker();
-        List<LongestProject> longestProjects = new DatabaseQueryService().findLongestProject();
-        List<ProjectPrices> projectPrices = new DatabaseQueryService().findProjectPrices();
-        List<YoungestEldestWorkers> youngestEldestWorkers = new DatabaseQueryService().findYoungestEldestWorkers();
-
-
-        System.out.println(maxProjectCountClients.toString()+"\n"+maxSalaryWorkers.toString()+"\n"+
-                longestProjects.toString()+"\n"+"Project prices are\n"+projectPrices.toString()+
-                "\n"+"Youngest and Eldest Workers are\n"+youngestEldestWorkers.toString());
+        System.out.println("All clients: "+clientService.listAll().toString());
     }
 }

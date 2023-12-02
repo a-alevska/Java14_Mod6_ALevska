@@ -1,12 +1,15 @@
 package org.example.wrappers;
 
-public class Clients {
-    private final String name;
-    public Clients(String name){
-        this.name = name;
-    }
+import lombok.*;
 
-    public String getName() {
-        return name;
-    }
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+
+public class Clients {
+    private final long id;
+    private final String name;
+
 }
